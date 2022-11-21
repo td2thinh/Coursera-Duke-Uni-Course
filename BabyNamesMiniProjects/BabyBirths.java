@@ -1,5 +1,6 @@
 import edu.duke.*;
 import org.apache.commons.csv.*;
+import java.io.*;
 /**
  * Write a description of BabyBirths here.
  * 
@@ -79,6 +80,35 @@ public class BabyBirths {
         return "No Name";
     }
     
+    public void whatIsNameInYear (String name, int year, int newYear, String gender)
+    {
+        int oldRank = getRank(year, name, gender);
+        String newName = getName(newYear, oldRank, gender);
+        System.out.println(name + " born in " + year + " would be " + newName + " if she was born in " + newYear);
+    }
+    
+    public int yearOfHighestRank (String name, String gender)
+    {
+        int year = 0, result = 0;
+        int highestRank = Integer.MAX_VALUE;
+        
+        DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles())
+        {
+            year = Integer.parseInt(f.getName().replaceAll("[^0-9]", ""));
+            System.out.println("Year: " + year);
+            int currentRank = getRank(year, name, gender);
+            
+            if (currentRank <= highestRank)
+            {
+                highestRank = currentRank;
+                result = year;
+            }
+            System.out.println("Rank: " + highestRank);
+        }
+        return result;
+    }
+    
     public void testTotalBirths ()
     {
         FileResource fr = new FileResource();
@@ -93,7 +123,18 @@ public class BabyBirths {
     
     public void testGetName()
     {
-        int rank = 2;
-        System.out.println("Name of rank " + rank + ": " + getName(2012, rank, "M"));
+        int rank = 3;
+        System.out.println("Name of rank " + rank + ": " + getName(2014, rank, "F"));
+    }
+    
+    public void testNewName()
+    {
+        whatIsNameInYear("Isabella", 2012, 2014, "F");
+    }
+    
+    public void testGetYear()
+    {
+        String name = "Mason";
+        System.out.println("Year of highest rank for " + name + " is: " + yearOfHighestRank(name, "M"));
     }
 }
