@@ -96,7 +96,6 @@ public class BabyBirths {
         for (File f : dr.selectedFiles())
         {
             year = Integer.parseInt(f.getName().replaceAll("[^0-9]", ""));
-            System.out.println("Year: " + year);
             int currentRank = getRank(year, name, gender);
             
             if (currentRank <= highestRank)
@@ -104,9 +103,37 @@ public class BabyBirths {
                 highestRank = currentRank;
                 result = year;
             }
-            System.out.println("Rank: " + highestRank);
         }
         return result;
+    }
+    
+    public double getAverageRank (String name, String gender)
+    {
+        int result = 0, count = 0;
+        DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles())
+        {
+            int year = Integer.parseInt(f.getName().replaceAll("[^0-9]", ""));
+            int currentRank = getRank(year, name, gender);
+            result += currentRank;
+            count += 1;
+        }
+        return result * 1.0 / count;
+    }
+        
+    public int getTotalBirthsRankedHigher (int year, String name, String gender)
+    {
+        int nameRank = getRank(year, name, gender);
+        int totalBirths = 0;
+        int rank;
+        FileResource fr = new FileResource("yob" + Integer.toString(year) + "short.csv");
+        for (CSVRecord rec : fr.getCSVParser(false))
+        {
+            String currentName = rec.get(0);
+            if (getRank(year, currentName, gender) < nameRank)
+            {
+            }
+        }
     }
     
     public void testTotalBirths ()
@@ -136,5 +163,11 @@ public class BabyBirths {
     {
         String name = "Mason";
         System.out.println("Year of highest rank for " + name + " is: " + yearOfHighestRank(name, "M"));
+    }
+    
+    public void testAvgRank()
+    {
+        String name = "Jacob";
+        System.out.println("Average rank for " + name + " : " + getAverageRank(name, "M"));
     }
 }
