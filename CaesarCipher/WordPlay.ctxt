@@ -5,4 +5,6 @@ comment1.params=ch
 comment1.target=boolean\ isVowel(char)
 comment2.params=phrase\ ch
 comment2.target=java.lang.String\ replaceVowels(java.lang.String,\ char)
-numComments=3
+comment3.params=phrase\ ch
+comment3.target=java.lang.String\ emphasize(java.lang.String,\ char)
+numComments=4

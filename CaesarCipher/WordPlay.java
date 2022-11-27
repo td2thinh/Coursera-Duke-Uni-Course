@@ -43,11 +43,11 @@ public class WordPlay {
             {
                 if (i % 2 == 0)
                 {
-                    sb.setCharAt(i) = '*';
+                    sb.setCharAt(i, '*');
                 }
                 else
                 {
-                    sb.setCharAt(i) = '+';
+                    sb.setCharAt(i, '+');
                 }
             }
         }
