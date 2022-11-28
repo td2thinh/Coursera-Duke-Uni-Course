@@ -76,8 +76,8 @@ public class CaesarCipher {
     {
         FileResource fr = new FileResource();
         String message = fr.asString();
-        int key = 23;
-        String encrypted = encrypt(message, key);
+        int key = 15;
+        String encrypted = encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21);
         System.out.println("key is " + key + "\n" + encrypted);
     }
 }
