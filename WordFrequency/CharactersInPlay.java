@@ -50,6 +50,7 @@ public class CharactersInPlay {
 
     public void charactersWithNumParts(int num1, int num2)
     {
+        System.out.println("Characters with number of speaking parts between " + num1 + " and " + num2 + ":");
         for (int i = 0; i < myCharacters.size(); i++)
         {
             if (myFreqs.get(i) >= num1 && myFreqs.get(i) <= num2)

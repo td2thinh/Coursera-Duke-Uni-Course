@@ -59,8 +59,11 @@ public class WordFrequencies {
         findUnique();
         System.out.println("Number of unique words: " + myWords.size());
         for (int i = 0; i < myWords.size(); i++)
-        {
-            System.out.println(myFreqs.get(i) + "\t" + myWords.get(i));
+        {   
+            if (myFreqs.get(i) > 500)
+            {
+                System.out.println(myFreqs.get(i) + "\t" + myWords.get(i));
+            }
         }
         int maxIndex = findIndexOfMax();
         System.out.println("The word that occurs most often and its count are: " + myWords.get(maxIndex) + " " + myFreqs.get(maxIndex));
