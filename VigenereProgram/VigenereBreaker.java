@@ -30,10 +30,12 @@ public class VigenereBreaker {
         // WRITE YOUR CODE HERE
         FileResource fr = new FileResource();
         String input = fr.asString();
-        int[] key = tryKeyLength(input, 5, 'e');
+        int[] key = tryKeyLength(input, 4, 'e');
+
         VigenereCipher vc = new VigenereCipher(key);
         String decrypted = vc.decrypt(input);
         System.out.println(decrypted);
+
     }
 
 }
