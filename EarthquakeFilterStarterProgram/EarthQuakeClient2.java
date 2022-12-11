@@ -21,12 +21,15 @@ public class EarthQuakeClient2 {
         EarthQuakeParser parser = new EarthQuakeParser();
         // String source =
         // "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedatasmall.atom";
+        String source = "data/nov20quakedata.atom";
         ArrayList<QuakeEntry> list = parser.read(source);
         System.out.println("read data for " + list.size() + " quakes");
 
-        Filter filterMagnitude = new MagnitudeFilter(4.0, 5.0);
-        Filter filterDepth = new DepthFilter(-35000.0, -12000.0);
+        Filter filterMagnitude = new MagnitudeFilter(3.49, 4.51);
+        Filter filterDepth = new DepthFilter(-55000.1, -19999.0);
+        // Filter filterDist = new DistanceFilter(new Location(35.42, 139.43),
+        // 10000000.0);
+        // Filter filterPhrase = new PhraseFilter("any", "Japan");
 
         ArrayList<QuakeEntry> m7 = filter(list, filterMagnitude);
         m7 = filter(m7, filterDepth);
@@ -57,6 +60,50 @@ public class EarthQuakeClient2 {
                     qe.getMagnitude(),
                     qe.getInfo());
         }
+    }
+
+    public void testMatchAllFilter() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        // String source =
+        // "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedata.atom";
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("read data for " + list.size() + " quakes");
+        MatchAllFilter maf = new MatchAllFilter();
+        maf.addFilter(new MagnitudeFilter(0.99, 4.1));
+        maf.addFilter(new DepthFilter(-180000.1, -29999.0));
+        maf.addFilter(new PhraseFilter("any", "o"));
+        int count = 0;
+        for (QuakeEntry qe : list) {
+            if (maf.satisfies(qe)) {
+                System.out.println(qe);
+                count += 1;
+            }
+        }
+        System.out.println("Found " + count + " quakes that match that criteria");
+
+    }
+
+    public void testMatchAllFilter2() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        // String source =
+        // "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+        String source = "data/nov20quakedata.atom";
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("read data for " + list.size() + " quakes");
+        MatchAllFilter maf = new MatchAllFilter();
+        maf.addFilter(new MagnitudeFilter(-0.01, 5.1));
+        maf.addFilter(new DistanceFilter(new Location(55.7308, 9.1153), 3000000));
+        maf.addFilter(new PhraseFilter("any", "e"));
+        int count = 0;
+        for (QuakeEntry qe : list) {
+            if (maf.satisfies(qe)) {
+                System.out.println(qe);
+                count += 1;
+            }
+        }
+        System.out.println("Found " + count + " quakes that match that criteria");
+
     }
 
 }

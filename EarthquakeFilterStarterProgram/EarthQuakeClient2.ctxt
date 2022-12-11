@@ -10,4 +10,6 @@ comment4.params=
 comment4.target=void\ createCSV()
 comment5.params=list
 comment5.target=void\ dumpCSV(java.util.ArrayList)
-numComments=6
+comment6.params=
+comment6.target=void\ testMatchAllFilter()
+numComments=7

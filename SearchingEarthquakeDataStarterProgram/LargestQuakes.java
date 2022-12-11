@@ -9,12 +9,12 @@ import edu.duke.*;
  */
 public class LargestQuakes {
     public void findLargestQuakes() {
-        String source = "data/nov20quakedatasmall.atom";
+        String source = "data/nov20quakedata.atom";
         EarthQuakeParser parser = new EarthQuakeParser();
         ArrayList<QuakeEntry> list = parser.read(source);
         System.out.println("read data for " + list.size());
         // System.out.println("Largest quake: " + list.get(indexOfLargest(list)));
-        ArrayList<QuakeEntry> largest = getLargest(list, 5);
+        ArrayList<QuakeEntry> largest = getLargest(list, 50);
         for (QuakeEntry qe : largest) {
             System.out.println(qe);
         }
