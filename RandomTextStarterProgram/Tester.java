@@ -8,7 +8,7 @@ public class Tester {
         st = st.replace('\n', ' ');
         MarkovOne markov = new MarkovOne();
         markov.setTraining(st);
-        ArrayList<String> follows = markov.getFollows("t");
+        ArrayList<String> follows = markov.getFollows("th");
         System.out.println(follows.size());
     }
 }

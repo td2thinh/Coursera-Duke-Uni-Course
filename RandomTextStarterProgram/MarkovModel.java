@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MarkovOne {
+public class MarkovModel {
     private String myText;
     private Random myRandom;
+    private int markovNum;
 
-    public MarkovOne() {
+    public MarkovModel(int N) {
         myRandom = new Random();
+        markovNum = N;
     }
 
     public void setRandom(int seed) {
@@ -36,14 +38,11 @@ public class MarkovOne {
     }
 
     public String getRandomText(int numChars) {
-        if (myText == null) {
-            return "";
-        }
         StringBuilder sb = new StringBuilder();
-        int index = myRandom.nextInt(myText.length() - 1);
-        String key = myText.substring(index, index + 1);
+        int index = myRandom.nextInt(myText.length() - markovNum);
+        String key = myText.substring(index, index + markovNum);
         sb.append(key);
-        for (int k = 0; k < numChars - 1; k++) {
+        for (int k = 0; k < numChars - markovNum; k++) {
             ArrayList<String> follows = getFollows(key);
             if (follows.size() == 0) {
                 break;
