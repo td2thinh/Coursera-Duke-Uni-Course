@@ -32,8 +32,9 @@ public class MarkovRunner {
         FileResource fr = new FileResource();
         String st = fr.asString();
         st = st.replace('\n', ' ');
-        MarkovWord markovWord = new MarkovWord(3);
-        runModel(markovWord, st, 200, 643);
+        EfficientMarkovWord markovWord = new EfficientMarkovWord(6);
+        runModel(markovWord, st, 200, 792);
+        markovWord.printMap();
     }
 
     private void printOut(String s) {
